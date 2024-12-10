@@ -9,7 +9,14 @@ const BottomTabNavigator = createBottomTabNavigator();
 const TabsLayout = () => {
   return (
     <BottomTabNavigator.Navigator>
-        <BottomTabNavigator.Screen name="Home" component={HomeScreen} />
+        <BottomTabNavigator.Screen 
+        name="Home" 
+        component={HomeScreen} 
+        options={{
+            tabBarLabel: "Home",
+            headerTitle: "The Coffee Club"
+        }}
+        />
         <BottomTabNavigator.Screen name="Settings" component={SettingsScreen} />
     </BottomTabNavigator.Navigator>
   )
