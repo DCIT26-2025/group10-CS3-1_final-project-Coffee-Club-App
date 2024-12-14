@@ -1,5 +1,11 @@
 import { View, Text, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { MenuScreenProps } from '../navigation/NavigationType';
+
+
+
 
 
 const categories = [
@@ -19,7 +25,7 @@ const flavors = [
     { name: "Hazelnut" },
 ];
 
-const HomeScreen = () => {
+const MenuScreen = ({ navigation }: MenuScreenProps) => {
   return (
     <View>
       <FlatList 
@@ -42,6 +48,7 @@ const HomeScreen = () => {
                         height: 200,
                         borderRadius: 20,
                     }}
+                    onPress={() => navigation.navigate("Product")}
                 >
                     <Text style={{ color: "white" }}>{item.name}</Text>
                 </TouchableOpacity>
@@ -95,4 +102,4 @@ const HomeScreen = () => {
   )
 }
 
-export default HomeScreen
+export default MenuScreen
