@@ -1,4 +1,4 @@
-import { View, Text, FlatList, TouchableOpacity } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -38,19 +38,16 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
         renderItem={({ item }) => {
             return (
                 <TouchableOpacity
-                    style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        flexDirection: "row",
-                        backgroundColor: "#796704FF",
-                        flex: 1,
-                        height: 200,
-                        borderRadius: 20,
-                    }}
+                    style={styles.product_card}
                     onPress={() => navigation.navigate("Product")}
                 >
-                    <Text style={{ color: "white" }}>{item.name}</Text>
+                    <View style={styles.product_image_container}>
+                        <Text>Product Image</Text>
+                    </View>
+                    <View style={styles.product_text_container}>
+                        <Text style={{ color: "white" }}>{item.name}</Text>
+                    </View>
+                    
                 </TouchableOpacity>
             )
         }}
@@ -101,5 +98,35 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+    product_card: {
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        backgroundColor: "#796704FF",
+        flex: 1,
+        height: 200,
+        borderRadius: 20,
+    },
+
+    product_image_container: {
+        display: "flex",
+        width: "100%",
+        height: "70%",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "lightgreen",
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+    },
+    product_text_container: {
+        display: "flex",
+        width: "100%",
+        height: "30%",
+        justifyContent:"center",
+        alignItems: "center",
+    }
+})
 
 export default MenuScreen
