@@ -1,4 +1,4 @@
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -42,8 +42,10 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
                     onPress={() => navigation.navigate("Product")}
                 >
                     <View style={styles.product_image_container}>
-                        <Text>Product Image</Text>
+                        <Image source={require("../assets/images/tempImages/temp_coffee_img.png")} 
+                        style={styles.product_image}/>
                     </View>
+                    
                     <View style={styles.product_text_container}>
                         <Text style={{ color: "white" }}>{item.name}</Text>
                     </View>
@@ -126,6 +128,11 @@ const styles = StyleSheet.create({
         height: "30%",
         justifyContent:"center",
         alignItems: "center",
+    },
+
+    product_image: {
+        width: 120,
+        height: 120
     }
 })
 
