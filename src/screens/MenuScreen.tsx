@@ -16,13 +16,13 @@ const categories = [
 ]
 
 const flavors = [
-    { name: "Americano" },
-    { name: "Spanish Latte" },
-    { name: "Matcha" },
-    { name: "Caramel macchiato" },
-    { name: "Mocha" },
-    { name: "Vanilla Latte" },
-    { name: "Hazelnut" },
+    { name: "Americano", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Spanish Latte", price: 60.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Matcha", price: 70.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Caramel macchiato", price: 80.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Mocha", price: 85.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Vanilla Latte", price: 75.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Hazelnut", price: 100.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
 ];
 
 const MenuScreen = ({ navigation }: MenuScreenProps) => {
@@ -39,13 +39,17 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
             return (
                 <TouchableOpacity
                     style={styles.product_card}
-                    onPress={() => navigation.navigate("Product")}
+                    onPress={() => navigation.navigate("Product", { 
+                        name: item.name, 
+                        price: item.price,
+                        image: item.image
+                    })}
                 >
                     <View style={styles.product_image_container}>
                         <Image source={require("../assets/images/tempImages/temp_coffee_img.png")} 
                         style={styles.product_image}/>
                     </View>
-                    
+
                     <View style={styles.product_text_container}>
                         <Text style={{ color: "white" }}>{item.name}</Text>
                     </View>

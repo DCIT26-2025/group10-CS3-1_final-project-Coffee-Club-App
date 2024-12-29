@@ -3,7 +3,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export type RootStackParamList = {
     Menu: undefined;
-    Product: undefined;
+    Product: { name: string, price: number, image: any};
 }
 
 export type MenuScreenProps = NativeStackScreenProps<RootStackParamList, "Menu">
