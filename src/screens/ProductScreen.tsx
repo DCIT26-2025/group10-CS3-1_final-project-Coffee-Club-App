@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native'
+import React, { useState } from 'react'
 import { useRoute, RouteProp} from '@react-navigation/native'
 import { RootStackParamList } from '../navigation/NavigationType'
 
@@ -8,6 +8,22 @@ type ProductScreenRouteProp = RouteProp<RootStackParamList, "Product">;
 const ProductScreen = () => {
   const route = useRoute<ProductScreenRouteProp>();
   const { name, price, image } = route.params;
+
+  const [quantity,setQuantity] = useState(1);
+  
+  const incrementQuantity = () => {
+    if (quantity < 10) {
+      setQuantity(quantity + 1);
+    }
+  }
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  }
+
+  const totalPrice = price * quantity;
 
   return (
     <View style={styles.container}>
@@ -20,7 +36,29 @@ const ProductScreen = () => {
         <Text style={styles.product_name}>{name}</Text>
         <View style={styles.product_caffeine_level_container}></View>
         <Text style={styles.product_ingredients}>milk, coffee, condensed milk </Text>
-        <Text style={styles.product_price}>P{price.toFixed(2)} each</Text>
+
+        <View style={styles.add_quantity_container}>
+          <Text style={styles.product_price}>P{price.toFixed(2)} each</Text>
+
+          <View style={styles.quantity_counter}>
+            <TouchableOpacity onPress={decrementQuantity}>
+              <Text style={{fontSize: 50, fontWeight: "bold"}}>-</Text>
+            </TouchableOpacity>
+
+
+          <TextInput
+            style={styles.quantity_text_field}
+            value={String(quantity)}
+            editable={false}
+          />
+
+
+            <TouchableOpacity onPress={incrementQuantity}>
+              <Text style={{fontSize: 50, fontWeight: "bold"}}>+</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        
       </View>
 
       <View style={styles.add_to_cart_container}>
@@ -29,7 +67,7 @@ const ProductScreen = () => {
         </TouchableOpacity>
 
         <View style={styles.cart_price_container}>
-          <Text style={styles.cart_price}>P65.00</Text>
+          <Text style={styles.cart_price}>P{totalPrice.toFixed(2)}</Text>
         </View>
       </View>
       
@@ -89,13 +127,47 @@ const styles = StyleSheet.create({
 
   product_price: {
     fontSize: 20,
-    marginTop: 100
+    marginRight: 80
   },
   product_image: {
     width: 120,
     height: 120,
   },
 
+  add_quantity_container: {
+    display: "flex", 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center", 
+    width: "99%",
+    height: "30%",
+    marginTop: 50
+
+  },
+
+  quantity_counter: {
+    display: "flex", 
+    flexDirection: "row", 
+    height: "100%",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    
+  },
+
+  quantity_text_field: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 5,
+    textAlign: 'center',
+    fontSize: 20,
+    width: 60,
+    height: 50,
+    backgroundColor: '#fff',
+    marginHorizontal: 10
+  },
+  
   add_to_cart_container: {
     marginRight: 30,
     marginTop: 20,
