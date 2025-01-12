@@ -28,11 +28,22 @@ const flavors = [
 const MenuScreen = ({ navigation }: MenuScreenProps) => {
   return (
     <View>
+      <View style={styles.header}>
+        <View>
+            <Text style={styles.header_logo}>TCC Logo</Text>
+        </View>
+        <View style={styles.header_title}>
+            <Text style={styles.header_title_text1}>the coffee</Text>
+            <Text style={styles.header_title_text2}>club.</Text>
+        </View>
+        
+      </View>
+      
       <FlatList 
         data={flavors}
         numColumns={2}
         columnWrapperStyle={{ gap: 10, paddingHorizontal: 17 }}
-        contentContainerStyle={{ gap: 10, paddingBottom: 20 }}
+        contentContainerStyle={{ gap: 10, paddingBottom: 80 }}
         keyExtractor={(item, index) => item.name + index}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
@@ -61,7 +72,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
         ListHeaderComponentStyle={{ marginVertical: 10 }}
         ListHeaderComponent={() => (
             <View> 
-                <Text style={{ fontWeight: "600" }}>Categories</Text>
+                <Text style={{ fontWeight: "600", fontSize: 20, textAlign: "center" }}>Categories</Text>
                 <FlatList 
                     horizontal={true}
                     style={{ paddingVertical: 5 }}
@@ -70,18 +81,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
                     data={categories}
                     keyExtractor={(item, index) => item.name + index}
                     renderItem={({ item }) => (
-                        <TouchableOpacity
-                            style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                flexDirection: "row",
-                                width: 300,
-                                height: 240,
-                                backgroundColor: "#047579FF",
-                                borderRadius: 20,
-                            }}
-                        >
+                        <TouchableOpacity style={styles.categories_card}>
                             <Text style={{ color: "white" }}>{item.name}</Text>
                         </TouchableOpacity>
                     )}
@@ -106,6 +106,48 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
 }
 
 const styles = StyleSheet.create({
+    header: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    header_title: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        marginRight: 10,
+        marginTop: 10
+    },
+    header_title_text1: {
+        color: "brown",
+        fontSize: 20,
+        fontWeight: "bold"
+    },
+    header_title_text2: {
+        color: "brown",
+        fontSize: 20,
+        fontWeight: "bold",
+        marginLeft: 40
+    },
+    header_logo: {
+        display: "flex",
+        backgroundColor: "brown",
+        alignItems: "center",
+        height: 50,
+        width: 50,
+        marginLeft: 10,
+        marginTop: 10,
+    },
+    categories_card: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "row",
+        width: 160,
+        height: 200,
+        backgroundColor: "#047579FF",
+        borderRadius: 40,
+    },
     product_card: {
         display: "flex",
         alignItems: "center",
@@ -113,7 +155,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#796704FF",
         flex: 1,
         height: 200,
-        borderRadius: 20,
+        borderRadius: 40,
     },
 
     product_image_container: {
@@ -123,8 +165,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "lightgreen",
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
     },
     product_text_container: {
         display: "flex",
