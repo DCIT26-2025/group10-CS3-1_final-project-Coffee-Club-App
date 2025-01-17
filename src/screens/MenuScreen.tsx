@@ -22,30 +22,26 @@ const icedcoffee_flavors = [
 ];
 
 const milktea_flavors = [
-    { name: "Thai"},
-    { name: "Tiramisu"},
-    { name: "Matcha"},
-    { name: "Taro"},
-    { name: "Creme brulee"},
+    { name: "Thai", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Tiramisu", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Matcha", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Taro", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Creme brulee", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
 ];
 
 const lemonade_flavors = [
-    { name: "Blueberr"},
-    { name: "Mango"},
-    { name: "Lime"},
-    { name: "Strawberry"},
-    { name: "Blue Caracao"},
-    { name: "Four Seasons"},
+    { name: "Blueberr", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Mango", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Lime", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Strawberry", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Blue Caracao", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Four Seasons", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
 ];
 
 const flavors = [
-    { name: "Americano", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
-    { name: "Spanish Latte", price: 60.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
-    { name: "Matcha", price: 70.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
-    { name: "Caramel macchiato", price: 80.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
-    { name: "Mocha", price: 85.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
-    { name: "Vanilla Latte", price: 75.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
-    { name: "Hazelnut", price: 100.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    ...icedcoffee_flavors,
+    ...milktea_flavors,
+    ...lemonade_flavors
 ];
 
 const MenuScreen = ({ navigation }: MenuScreenProps) => {
@@ -86,7 +82,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
                     </View>
 
                     <View style={styles.product_text_container}>
-                        <Text style={{ color: "white" }}>{item.name}</Text>
+                        <Text style={{ color: "brown", fontWeight: "bold", fontSize: 20}}>{item.name}</Text>
                     </View>
                     
                 </TouchableOpacity>
@@ -106,7 +102,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
                     keyExtractor={(item, index) => item.name + index}
                     renderItem={({ item }) => (
                         <TouchableOpacity style={styles.categories_card}>
-                            <Text style={{ color: "white" }}>{item.name}</Text>
+                            <Text style={{ color: "brown", fontWeight: "bold", fontSize: 20}}>{item.name}</Text>
                         </TouchableOpacity>
                     )}
                 />
@@ -168,14 +164,14 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         width: 160,
         height: 200,
-        backgroundColor: "#047579FF",
+        backgroundColor: "#D9D9D9",
         borderRadius: 40,
     },
     product_card: {
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
-        backgroundColor: "#796704FF",
+        backgroundColor: "#D9D9D9",
         flex: 1,
         height: 200,
         borderRadius: 40,
@@ -187,7 +183,7 @@ const styles = StyleSheet.create({
         height: "70%",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "lightgreen",
+        backgroundColor: "D9D9D9",
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
     },
