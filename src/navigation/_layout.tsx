@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Image, StyleSheet, ImageSourcePropType } from 'react-native'
 import { Stack } from 'expo-router'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import MenuScreen from '../screens/MenuScreen'
@@ -8,17 +8,49 @@ import CartScreen from '../screens/CartScreen'
 import OrderStatusScreen from '../screens/OrderStatusScreen'
 import MenuStack from './StackNavigation'
 import { AntDesign } from '@expo/vector-icons'
+import { routeToScreen } from 'expo-router/build/useScreens'
 
 const BottomTabNavigator = createBottomTabNavigator();
 
 const TabsLayout = () => {
   return (
     <BottomTabNavigator.Navigator
-      screenOptions={{
-        tabBarStyle: styles.tabBar,
-        tabBarItemStyle: styles.tabBarItem,
-        tabBarActiveBackgroundColor: "brown"
-      }}
+      screenOptions={({ route }) => ({
+        tabBarStyle: styles.tabBarStyle,
+        tabBarItemStyle: styles.tabBarItemStyle,
+        tabBarShowLabel: false,
+        tabBarIcon: ({ focused }) => {
+          let iconName : keyof typeof AntDesign.glyphMap;
+          let iconSource : ImageSourcePropType;
+          switch (route.name) {
+            case "Menu":
+              iconSource = focused 
+              ? require("../assets/images/Tab Icons/menu_tab.png")
+              : require("../assets/images/Tab Icons/menu_tab_inactive.png");
+              break;
+            case "CartScreen":
+              iconSource = focused 
+              ? require("../assets/images/Tab Icons/cart_tab.png")
+              : require("../assets/images/Tab Icons/cart_tab_inactive.png");
+              break;
+            case "OrderStatusScreen":
+              iconSource = focused 
+              ? require("../assets/images/Tab Icons/notif_tab.png")
+              : require("../assets/images/Tab Icons/notif_tab_inactive.png");
+              break;
+            default:
+              iconSource = require("../assets/images/Tab Icons/menu_tab.png") ;
+              
+          }
+          return (
+            <View style={[styles.iconContainer, focused ? styles.activeTab : styles.inactiveTab]}>
+              <Image source={iconSource} style={styles.icon} />
+            </View>
+            
+          )
+        }
+      })}
+      
       safeAreaInsets={{ bottom: 0}}
     >
         <BottomTabNavigator.Screen 
@@ -27,7 +59,6 @@ const TabsLayout = () => {
         options={{
             tabBarLabel: "Menu",
             headerShown: false,
-            tabBarIcon: ({ focused }) => <AntDesign name="home" size={22}/>
         }}
         />
         <BottomTabNavigator.Screen 
@@ -51,7 +82,7 @@ const TabsLayout = () => {
 }
 
 const styles = StyleSheet.create({
-  tabBar: {
+  tabBarStyle: {
     position: "absolute",
     backgroundColor: "white",
     height: 80,
@@ -62,23 +93,32 @@ const styles = StyleSheet.create({
    
   },
 
-  tabBarItem: {
-    borderRadius: 20,
+  tabBarItemStyle: {
+    borderRadius: 0,
     margin: 20
+  },
+
+  iconContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 100,
+    height: 50,
+    borderRadius: 30,
   },
 
   activeTab: {
     backgroundColor: "brown",
-    borderRadius: 20,
-    margin: 20,
-    flex: 1
   },
 
   inactiveTab: {
-    backgroundColor: "brown",
-    borderRadius: 20,
-    margin: 20,
-    flex: 1
-  }
+    backgroundColor: "transparent",
+  },
+
+  icon: {
+    width: 35,
+    height: 35,
+    resizeMode: 'contain',
+  },
+
 })
 export default TabsLayout

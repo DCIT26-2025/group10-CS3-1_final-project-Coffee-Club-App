@@ -15,7 +15,7 @@ const MenuStack = () => {
         name="Menu" 
         component={MenuScreen}
         options={{
-            headerTitle: "The Coffee Club"
+            headerShown: false
         }}
         />
         <Stack.Screen 

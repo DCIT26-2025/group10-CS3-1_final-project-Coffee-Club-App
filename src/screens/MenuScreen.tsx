@@ -5,15 +5,38 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { MenuScreenProps } from '../navigation/NavigationType';
 
 
-
-
-
 const categories = [
     { name: "Iced Coffee" },
-    { name: "Non-Coffee" },
     { name: "Lemonade" },
     { name: "MilkTea" },
 ]
+
+const icedcoffee_flavors = [
+    { name: "Americano", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Spanish Latte", price: 60.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Matcha", price: 70.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Caramel macchiato", price: 80.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Mocha", price: 85.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Vanilla Latte", price: 75.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+    { name: "Hazelnut", price: 100.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
+];
+
+const milktea_flavors = [
+    { name: "Thai"},
+    { name: "Tiramisu"},
+    { name: "Matcha"},
+    { name: "Taro"},
+    { name: "Creme brulee"},
+];
+
+const lemonade_flavors = [
+    { name: "Blueberr"},
+    { name: "Mango"},
+    { name: "Lime"},
+    { name: "Strawberry"},
+    { name: "Blue Caracao"},
+    { name: "Four Seasons"},
+];
 
 const flavors = [
     { name: "Americano", price: 50.00, image: require("../assets/images/tempImages/temp_coffee_img.png") },
@@ -29,9 +52,10 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
   return (
     <View>
       <View style={styles.header}>
-        <View>
-            <Text style={styles.header_logo}>TCC Logo</Text>
-        </View>
+        
+        <Image source={require("../assets/images/Logos/TCC_Logo.png")} style={styles.header_logo}></Image>
+            
+        
         <View style={styles.header_title}>
             <Text style={styles.header_title_text1}>the coffee</Text>
             <Text style={styles.header_title_text2}>club.</Text>
@@ -72,7 +96,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
         ListHeaderComponentStyle={{ marginVertical: 10 }}
         ListHeaderComponent={() => (
             <View> 
-                <Text style={{ fontWeight: "600", fontSize: 20, textAlign: "center" }}>Categories</Text>
+                <Text style={{ fontWeight: "600", fontSize: 20, marginLeft: 40}}>Categories</Text>
                 <FlatList 
                     horizontal={true}
                     style={{ paddingVertical: 5 }}
@@ -96,7 +120,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
                         marginTop: 15,
                     }}
                 >
-                    <Text style={{ fontWeight: "600" }}>Flavors</Text>
+                    <Text style={{ fontWeight: "600" , fontSize: 20, marginLeft: 40}}>Flavors</Text>
                 </View>
             </View>
         )}
@@ -130,14 +154,13 @@ const styles = StyleSheet.create({
         marginLeft: 40
     },
     header_logo: {
-        display: "flex",
-        backgroundColor: "brown",
-        alignItems: "center",
-        height: 50,
-        width: 50,
-        marginLeft: 10,
-        marginTop: 10,
+        width: 70,
+        height: 70,
+        resizeMode: 'contain',
+        marginLeft: 15,
+        marginTop: 10
     },
+
     categories_card: {
         display: "flex",
         justifyContent: "center",
