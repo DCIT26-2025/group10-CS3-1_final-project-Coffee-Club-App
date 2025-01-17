@@ -5,17 +5,13 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { MenuScreenProps } from '../navigation/NavigationType';
 
 
-
-
-
 const categories = [
     { name: "Iced Coffee" },
-    { name: "Non-Coffee" },
     { name: "Lemonade" },
     { name: "MilkTea" },
 ]
 
-const flavors = [
+const icedcoffee_flavors = [
     { name: "Americano" },
     { name: "Spanish Latte" },
     { name: "Matcha" },
@@ -24,6 +20,30 @@ const flavors = [
     { name: "Vanilla Latte" },
     { name: "Hazelnut" },
 ];
+
+const milktea_flavors = [
+    { name: "Thai"},
+    { name: "Tiramisu"},
+    { name: "Matcha"},
+    { name: "Taro"},
+    { name: "Creme brulee"},
+];
+
+const lemonade_flavors = [
+    { name: "Blueberr"},
+    { name: "Mango"},
+    { name: "Lime"},
+    { name: "Strawberry"},
+    { name: "Blue Caracao"},
+    { name: "Four Seasons"},
+];
+
+const flavors = [
+    ...icedcoffee_flavors,
+    ...lemonade_flavors,
+    ...milktea_flavors,
+]; 
+
 
 const MenuScreen = ({ navigation }: MenuScreenProps) => {
   return (
