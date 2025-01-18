@@ -72,7 +72,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
         
       </View>
 
-      <View> 
+      <View style={styles.category_container}> 
         <Text style={{ fontWeight: "600", fontSize: 20, marginLeft: 40}}>Categories</Text>
         <FlatList 
             horizontal={true}
@@ -101,7 +101,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
                 marginTop: 15,
             }}
         >
-            <Text style={{ fontWeight: "600" , fontSize: 20, marginLeft: 35}}>Flavors</Text>
+            
         </View>
       </View>
       
@@ -109,7 +109,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
         data={filteredFlavors}
         numColumns={2}
         columnWrapperStyle={{ gap: 10, paddingHorizontal: 17 }}
-        contentContainerStyle={{ gap: 10, paddingBottom: 200 }}
+        contentContainerStyle={{ gap: 10, paddingBottom: 400, paddingTop: 20 }}
         keyExtractor={(item, index) => item.name + index}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
@@ -136,7 +136,6 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
                 </TouchableOpacity>
             )
         }}
-
         
       />
     </View>
@@ -175,13 +174,21 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
 
+    category_container: {
+        height: "22%",
+        borderBottomWidth: 5,
+        borderBottomColor: "brown", 
+        borderBottomLeftRadius: 40,
+        borderBottomRightRadius: 40
+    },
+
     categories_card: {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
         width: 160,
-        height: 200,
+        height: 160,
         backgroundColor: "#D9D9D9",
         borderRadius: 40,
     },
@@ -189,6 +196,10 @@ const styles = StyleSheet.create({
     selected_category_card: {
         borderColor: "brown",
         borderWidth: 5,
+    },
+
+    product_list_container: {
+
     },
     product_card: {
         display: "flex",

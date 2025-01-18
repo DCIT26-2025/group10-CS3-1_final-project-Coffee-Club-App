@@ -22,7 +22,7 @@ const MenuStack = () => {
         name="Product" 
         component={ProductScreen}
         options={{
-            headerTitle: "Product Name"
+            headerTitle: "Product"
         }}
         />
     </Stack.Navigator>
