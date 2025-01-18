@@ -10,7 +10,7 @@ type ProductScreenRouteProp = RouteProp<RootStackParamList, "Product">;
 
 const ProductScreen = () => {
   const route = useRoute<ProductScreenRouteProp>();
-  const { name, price, image } = route.params;
+  const { name, price, ingredients, caffeine_level, image } = route.params;
 
   const [quantity,setQuantity] = useState(1);
   
@@ -24,6 +24,23 @@ const ProductScreen = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
+  }
+
+  const caffeine_level_indicator = () => {
+    let image_source;
+    switch(caffeine_level) {
+      case 1:
+        image_source = require("../assets/images/Caffeine Levels/lvl1.png");
+        break;
+      case 2:
+        image_source = require("../assets/images/Caffeine Levels/lvl2.png");
+        break;
+      case 3:
+        image_source = require("../assets/images/Caffeine Levels/lvl3.png");
+        break;
+    }
+
+    return image_source;
   }
 
   const totalPrice = price * quantity;
@@ -40,8 +57,10 @@ const ProductScreen = () => {
           
           <View>
             <Text style={styles.product_name}>{name}</Text>
-            <View style={styles.product_caffeine_level_container}></View>
-            <Text style={styles.product_ingredients}>milk, coffee, condensed milk </Text>
+            <View style={styles.product_caffeine_level_container}>
+              <Image source={caffeine_level_indicator()} style={styles.caffeine_level_indicator_image}/>
+            </View>
+            <Text style={styles.product_ingredients}>{ingredients}</Text>
           </View>
           
 
@@ -144,10 +163,15 @@ const styles = StyleSheet.create({
   },
 
   product_caffeine_level_container: {
-    backgroundColor: "brown",
     width: 70,
-    height: 20,
-    marginVertical: 20
+    height: 40,
+    marginVertical: 5
+  },
+
+  caffeine_level_indicator_image: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain"
   },
 
   product_ingredients: {
