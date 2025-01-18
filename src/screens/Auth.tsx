@@ -10,7 +10,7 @@ import {
   AppState,
 } from "react-native";
 import { supabase } from "../lib/supabase";
-import TabsLayout from "../navigation/_layout.tsx";
+import TabsLayout from "../navigation/_layout";
 
 // Add Supabase auto-refresh logic
 AppState.addEventListener("change", (state) => {
@@ -45,6 +45,7 @@ export default function Auth() {
         Alert.alert("Success", "Logged in successfully!");
         // Navigate to your next screen here
         return <TabsLayout />;
+        // I CANT MAKE THIS WORK I DO NOT UNDERSTAND BUTTONS
       }
     } catch (err) {
       console.error("Sign-in error:", err);
