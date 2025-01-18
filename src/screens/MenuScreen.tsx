@@ -13,29 +13,31 @@ const categories = [
 
 const icedcoffee_flavors = [
     { name: "Americano", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Spanish Latte", price: 60.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Matcha", price: 70.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Caramel macchiato", price: 80.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Mocha", price: 85.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Vanilla Latte", price: 75.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Hazelnut", price: 100.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
+    { name: "Spanish Latte", price: 60.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Iced Coffee/spanish_latte.png") },
+    { name: "Matcha", price: 70.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Iced Coffee/matcha.png") },
+    { name: "Caramel macchiato", price: 80.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Iced Coffee/caramel_macchiato.png") },
+    { name: "Mocha", price: 85.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Iced Coffee/mocha.png") },
+    { name: "Vanilla Latte", price: 75.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Iced Coffee/vanilla_latte.png") },
+    { name: "Hazelnut", price: 100.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Iced Coffee/hazelnut.png") },
 ];
+
 
 const milktea_flavors = [
-    { name: "Thai", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Tiramisu", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Matcha", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Taro", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Creme brulee", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
+    { name: "Thai", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Milktea/thai.png") },
+    { name: "Tiramisu", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Milktea/tiramisu.png") },
+    { name: "Matcha Tea", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Milktea/matcha_tea.png") },
+    { name: "Taro", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Milktea/taro.png") },
+    { name: "Crème brûlée", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Milktea/Crème brûlée.png") },
 ];
 
+
 const lemonade_flavors = [
-    { name: "Blueberr", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Mango", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Lime", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Strawberry", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Blue Caracao", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
-    { name: "Four Seasons", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
+    { name: "Blueberry", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Lemonade/Blueberry.png") },
+    { name: "Mango", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Lemonade/mango.png") },
+    { name: "Lime", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Lemonade/lime.png") },
+    { name: "Strawberry", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Lemonade/strawberry.png") },
+    { name: "Blue Caracao", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Lemonade/blue caracao.png") },
+    { name: "Four Seasons", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Lemonade/four_seasons.png") },
 ];
 
 const flavors = [
@@ -50,8 +52,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
       <View style={styles.header}>
         
         <Image source={require("../assets/images/Logos/TCC_Logo.png")} style={styles.header_logo}></Image>
-            
-        
+                   
         <View style={styles.header_title}>
             <Text style={styles.header_title_text1}>the coffee</Text>
             <Text style={styles.header_title_text2}>club.</Text>
@@ -63,7 +64,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
         data={flavors}
         numColumns={2}
         columnWrapperStyle={{ gap: 10, paddingHorizontal: 17 }}
-        contentContainerStyle={{ gap: 10, paddingBottom: 80 }}
+        contentContainerStyle={{ gap: 10, paddingBottom: 200 }}
         keyExtractor={(item, index) => item.name + index}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
@@ -79,7 +80,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
                     })}
                 >
                     <View style={styles.product_image_container}>
-                        <Image source={require("../assets/images/Flavors/Iced Coffee/americano.png")} 
+                        <Image source={item.image} 
                         style={styles.product_image}/>
                     </View>
 
@@ -198,8 +199,10 @@ const styles = StyleSheet.create({
     },
 
     product_image: {
-        width: 120,
-        height: 120
+        marginTop: 20,
+        width: "100%",
+        height: "100%",
+        resizeMode: "contain"
     }
 })
 

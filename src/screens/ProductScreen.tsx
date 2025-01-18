@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   product_image_container: {
     position: "absolute",
     top: (-height * 0.1) + 30,
-    right: -10,
+    right: (-width * 0.1) + 50,
     width: "40%",
     height: 80,
     backgroundColor: "transparent",    
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   },
 
   product_name: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "bold",
     color: "#432818"
   },
