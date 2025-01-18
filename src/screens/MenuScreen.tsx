@@ -1,11 +1,12 @@
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { MenuScreenProps } from '../navigation/NavigationType';
 
 
 const categories = [
+    { name: "All Flavors"},
     { name: "Iced Coffee" },
     { name: "Lemonade" },
     { name: "MilkTea" },
@@ -47,6 +48,17 @@ const flavors = [
 ];
 
 const MenuScreen = ({ navigation }: MenuScreenProps) => {
+  const [selectedCategory, setSelectedCategory] = useState<string>("All Flavors");
+  
+  const filteredFlavors = selectedCategory === "All Flavors"
+    ? flavors
+    : selectedCategory === "Iced Coffee"
+    ? icedcoffee_flavors
+    : selectedCategory === "MilkTea"
+    ? milktea_flavors
+    : lemonade_flavors;
+
+
   return (
     <View>
       <View style={styles.header}>
@@ -59,9 +71,42 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
         </View>
         
       </View>
+
+      <View> 
+        <Text style={{ fontWeight: "600", fontSize: 20, marginLeft: 40}}>Categories</Text>
+        <FlatList 
+            horizontal={true}
+            style={{ paddingVertical: 5 }}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ gap:10, paddingHorizontal: 12}}
+            data={categories}
+            keyExtractor={(item, index) => item.name + index}
+            renderItem={({ item }) => (
+                <TouchableOpacity 
+                style={[styles.categories_card, 
+                        selectedCategory === item.name && styles.selected_category_card
+                    ]}
+                    onPress={() => setSelectedCategory(item.name)}>
+                    <Text style={{ color: "brown", fontWeight: "bold", fontSize: 20}}>{item.name}</Text>
+                </TouchableOpacity>
+            )}
+        />
+        <View
+            style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexDirection: "row",
+                paddingHorizontal: 12,
+                marginTop: 15,
+            }}
+        >
+            <Text style={{ fontWeight: "600" , fontSize: 20, marginLeft: 35}}>Flavors</Text>
+        </View>
+      </View>
       
       <FlatList 
-        data={flavors}
+        data={filteredFlavors}
         numColumns={2}
         columnWrapperStyle={{ gap: 10, paddingHorizontal: 17 }}
         contentContainerStyle={{ gap: 10, paddingBottom: 200 }}
@@ -92,37 +137,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
             )
         }}
 
-        ListHeaderComponentStyle={{ marginVertical: 10 }}
-        ListHeaderComponent={() => (
-            <View> 
-                <Text style={{ fontWeight: "600", fontSize: 20, marginLeft: 40}}>Categories</Text>
-                <FlatList 
-                    horizontal={true}
-                    style={{ paddingVertical: 5 }}
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{ gap:10, paddingHorizontal: 12}}
-                    data={categories}
-                    keyExtractor={(item, index) => item.name + index}
-                    renderItem={({ item }) => (
-                        <TouchableOpacity style={styles.categories_card}>
-                            <Text style={{ color: "brown", fontWeight: "bold", fontSize: 20}}>{item.name}</Text>
-                        </TouchableOpacity>
-                    )}
-                />
-                <View
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        flexDirection: "row",
-                        paddingHorizontal: 12,
-                        marginTop: 15,
-                    }}
-                >
-                    <Text style={{ fontWeight: "600" , fontSize: 20, marginLeft: 40}}>Flavors</Text>
-                </View>
-            </View>
-        )}
+        
       />
     </View>
   )
@@ -169,6 +184,11 @@ const styles = StyleSheet.create({
         height: 200,
         backgroundColor: "#D9D9D9",
         borderRadius: 40,
+    },
+
+    selected_category_card: {
+        borderColor: "brown",
+        borderWidth: 5,
     },
     product_card: {
         display: "flex",
