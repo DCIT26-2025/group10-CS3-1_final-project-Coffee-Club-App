@@ -1,12 +1,6 @@
-import { View, Text } from 'react-native';
-import React from 'react';
-import TabsLayout from '../navigation/_layout';
-import { NavigationContainer } from '@react-navigation/native';
-
+import React from "react";
+import Auth from "../screens/Auth";
 
 export default function App() {
-  return (
-    <TabsLayout />
-  )
+  return <Auth />;
 }
-
