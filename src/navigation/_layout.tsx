@@ -12,7 +12,7 @@ import { routeToScreen } from 'expo-router/build/useScreens'
 
 const BottomTabNavigator = createBottomTabNavigator();
 
-const AppHeader = () => {
+export const AppHeader = () => {
     return(
       <View style={styles.header}>
               
@@ -72,9 +72,8 @@ const TabsLayout = () => {
         name="Menu" 
         component={MenuStack} 
         options={{
-            header: AppHeader,
             tabBarLabel: "Menu",
-            //headerShown: false,
+            headerShown: false,
         }}
         />
         <BottomTabNavigator.Screen 

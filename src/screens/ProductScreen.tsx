@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput, Dimensions 
 import React, { useState } from 'react'
 import { useRoute, RouteProp} from '@react-navigation/native'
 import { RootStackParamList } from '../navigation/NavigationType'
+import { useCart } from '../utils/CartContext';
 
 
 const { width, height } = Dimensions.get('window');
@@ -11,6 +12,7 @@ type ProductScreenRouteProp = RouteProp<RootStackParamList, "Product">;
 const ProductScreen = () => {
   const route = useRoute<ProductScreenRouteProp>();
   const { name, price, ingredients, caffeine_level, image } = route.params;
+  const { addToCart } = useCart();
 
   const [quantity,setQuantity] = useState(1);
   
@@ -44,6 +46,19 @@ const ProductScreen = () => {
   }
 
   const totalPrice = price * quantity;
+
+  const handleAddToCart = () => {
+    const product = {
+      name,
+      price,
+      ingredients,
+      caffeine_level,
+      image,
+      quantity,
+      totalPrice,
+    };
+    addToCart(product);
+  };
 
   return (
     <View style={styles.container}>
@@ -89,7 +104,7 @@ const ProductScreen = () => {
         </View>
 
         <View style={styles.add_to_cart_container}>
-          <TouchableOpacity activeOpacity= {0.5} style={styles.add_to_cart_btn}>
+          <TouchableOpacity activeOpacity= {0.5} style={styles.add_to_cart_btn} onPress={handleAddToCart}>
           <Image source={require("../assets/images/Add_to_cart.png")} style={styles.add_to_cart_btn_icon}/>
           <Text style={{fontSize: 15, color: "white"}}>Add to cart</Text>
           </TouchableOpacity>

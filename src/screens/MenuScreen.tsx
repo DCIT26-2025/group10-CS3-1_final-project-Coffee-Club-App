@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { MenuScreenProps } from '../navigation/NavigationType';
+import { AppHeader } from '../navigation/_layout';
 
 
 const categories = [
@@ -61,6 +62,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
 
   return (
     <View>
+      <AppHeader />  
 
       <View style={styles.category_container}> 
         <Text style={{ fontWeight: "600", fontSize: 20, marginLeft: 40}}>Categories</Text>
