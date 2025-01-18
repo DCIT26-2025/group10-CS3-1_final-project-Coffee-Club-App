@@ -61,16 +61,6 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
 
   return (
     <View>
-      <View style={styles.header}>
-        
-        <Image source={require("../assets/images/Logos/TCC_Logo.png")} style={styles.header_logo}></Image>
-                   
-        <View style={styles.header_title}>
-            <Text style={styles.header_title_text1}>the coffee</Text>
-            <Text style={styles.header_title_text2}>club.</Text>
-        </View>
-        
-      </View>
 
       <View style={styles.category_container}> 
         <Text style={{ fontWeight: "600", fontSize: 20, marginLeft: 40}}>Categories</Text>
@@ -143,39 +133,9 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
 }
 
 const styles = StyleSheet.create({
-    header: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between"
-    },
-    header_title: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        marginRight: 10,
-        marginTop: 10
-    },
-    header_title_text1: {
-        color: "brown",
-        fontSize: 20,
-        fontWeight: "bold"
-    },
-    header_title_text2: {
-        color: "brown",
-        fontSize: 20,
-        fontWeight: "bold",
-        marginLeft: 40
-    },
-    header_logo: {
-        width: 70,
-        height: 70,
-        resizeMode: 'contain',
-        marginLeft: 15,
-        marginTop: 10
-    },
 
     category_container: {
-        height: "22%",
+        height: "25%",
         borderBottomWidth: 5,
         borderBottomColor: "brown", 
         borderBottomLeftRadius: 40,
@@ -197,10 +157,7 @@ const styles = StyleSheet.create({
         borderColor: "brown",
         borderWidth: 5,
     },
-
-    product_list_container: {
-
-    },
+    
     product_card: {
         display: "flex",
         alignItems: "center",

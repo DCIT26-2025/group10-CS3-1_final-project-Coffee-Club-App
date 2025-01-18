@@ -99,8 +99,7 @@ const ProductScreen = () => {
           </View>
         </View>
       </View>
-      
-      
+       
     </View>
   )
 }
