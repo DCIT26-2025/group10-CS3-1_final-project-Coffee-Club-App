@@ -10,7 +10,19 @@ import {
   AppState,
 } from "react-native";
 import { supabase } from "../lib/supabase";
-import TabsLayout from "../navigation/_layout";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+// Define the type for navigation
+type RootStackParamList = {
+  Auth: undefined;
+  TabsLayout: undefined;
+};
+
+type AuthScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Auth"
+>;
 
 // Add Supabase auto-refresh logic
 AppState.addEventListener("change", (state) => {
@@ -22,6 +34,7 @@ AppState.addEventListener("change", (state) => {
 });
 
 export default function Auth() {
+  const navigation = useNavigation<AuthScreenNavigationProp>(); // Typed navigation
   const [contactNumber, setContactNumber] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,7 +43,6 @@ export default function Auth() {
   async function signInWithPhone() {
     setLoading(true);
     try {
-      // Query the "users" table to find a matching user
       const { data, error } = await supabase
         .from("users")
         .select("*")
@@ -43,9 +55,7 @@ export default function Auth() {
         Alert.alert("Error", "Incorrect password.");
       } else {
         Alert.alert("Success", "Logged in successfully!");
-        // Navigate to your next screen here
-        return <TabsLayout />;
-        // I CANT MAKE THIS WORK I DO NOT UNDERSTAND BUTTONS
+        navigation.navigate("TabsLayout"); // Navigate to TabsLayout
       }
     } catch (err) {
       console.error("Sign-in error:", err);
@@ -59,10 +69,9 @@ export default function Auth() {
   async function signUpWithPhone() {
     setLoading(true);
     try {
-      // Insert the new user into the "users" table
       const { error } = await supabase.from("users").insert({
         contact_number: contactNumber,
-        password: password, // You should hash the password before storing it
+        password: password, // Hash the password in production
       });
 
       if (error) {
