@@ -1,13 +1,18 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput, Dimensions } from 'react-native'
 import React, { useState } from 'react'
 import { useRoute, RouteProp} from '@react-navigation/native'
 import { RootStackParamList } from '../navigation/NavigationType'
+import { useCart } from '../utils/CartContext';
+
+
+const { width, height } = Dimensions.get('window');
 
 type ProductScreenRouteProp = RouteProp<RootStackParamList, "Product">;
 
 const ProductScreen = () => {
   const route = useRoute<ProductScreenRouteProp>();
-  const { name, price, image } = route.params;
+  const { name, price, ingredients, caffeine_level, image } = route.params;
+  const { addToCart } = useCart();
 
   const [quantity,setQuantity] = useState(1);
   
@@ -23,55 +28,93 @@ const ProductScreen = () => {
     }
   }
 
+  const caffeine_level_indicator = () => {
+    let image_source;
+    switch(caffeine_level) {
+      case 1:
+        image_source = require("../assets/images/Caffeine Levels/lvl1.png");
+        break;
+      case 2:
+        image_source = require("../assets/images/Caffeine Levels/lvl2.png");
+        break;
+      case 3:
+        image_source = require("../assets/images/Caffeine Levels/lvl3.png");
+        break;
+    }
+
+    return image_source;
+  }
+
   const totalPrice = price * quantity;
+
+  const handleAddToCart = () => {
+    const product = {
+      name,
+      price,
+      ingredients,
+      caffeine_level,
+      image,
+      quantity,
+      totalPrice,
+    };
+    addToCart(product);
+  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.product_image_container}>
-        <Image source={image} style={styles.product_image} />
-        <Text>350 mL</Text>
-      </View>
+      <View style={styles.contentWrapper}>
+        
+        <View style= {styles.product_details_container}>
+          <View style={styles.product_image_container}>
+            <Image source={image} style={styles.product_image} />
+            <Text style={styles.imageLabel}>350 mL</Text>
+          </View>
+          
+          <View>
+            <Text style={styles.product_name}>{name}</Text>
+            <View style={styles.product_caffeine_level_container}>
+              <Image source={caffeine_level_indicator()} style={styles.caffeine_level_indicator_image}/>
+            </View>
+            <Text style={styles.product_ingredients}>{ingredients}</Text>
+          </View>
+          
 
-      <View style= {styles.product_details_container}>
-        <Text style={styles.product_name}>{name}</Text>
-        <View style={styles.product_caffeine_level_container}></View>
-        <Text style={styles.product_ingredients}>milk, coffee, condensed milk </Text>
+          <View style={styles.add_quantity_container}>
+            <Text style={styles.product_price}>P{price.toFixed(2)} each</Text>
 
-        <View style={styles.add_quantity_container}>
-          <Text style={styles.product_price}>P{price.toFixed(2)} each</Text>
-
-          <View style={styles.quantity_counter}>
-            <TouchableOpacity onPress={decrementQuantity}>
-              <Text style={{fontSize: 50, fontWeight: "bold"}}>-</Text>
-            </TouchableOpacity>
+            <View style={styles.quantity_counter}>
+              <TouchableOpacity onPress={decrementQuantity}>
+                <Text style={{fontSize: 50, fontWeight: "bold"}}>-</Text>
+              </TouchableOpacity>
 
 
-          <TextInput
-            style={styles.quantity_text_field}
-            value={String(quantity)}
-            editable={false}
-          />
+            <TextInput
+              style={styles.quantity_text_field}
+              value={String(quantity)}
+              editable={false}
+            />
 
 
-            <TouchableOpacity onPress={incrementQuantity}>
-              <Text style={{fontSize: 50, fontWeight: "bold"}}>+</Text>
-            </TouchableOpacity>
+              <TouchableOpacity onPress={incrementQuantity}>
+                <Text style={{fontSize: 50, fontWeight: "bold"}}>+</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          
+        </View>
+
+        <View style={styles.add_to_cart_container}>
+          <TouchableOpacity activeOpacity= {0.5} style={styles.add_to_cart_btn} onPress={handleAddToCart}>
+          <Image source={require("../assets/images/Add_to_cart.png")} style={styles.add_to_cart_btn_icon}/>
+          <Text style={{fontSize: 15, color: "white"}}>Add to cart</Text>
+          </TouchableOpacity>
+
+          <View style={styles.cart_price_container}>
+            <Text style={styles.cart_price}>P{totalPrice.toFixed(2)}</Text>
           </View>
         </View>
-        
       </View>
-
-      <View style={styles.add_to_cart_container}>
-        <TouchableOpacity activeOpacity= {0.5} style={styles.add_to_cart_btn}>
-        <Text style={{fontSize: 20, color: "white"}}>Add to cart</Text>
-        </TouchableOpacity>
-
-        <View style={styles.cart_price_container}>
-          <Text style={styles.cart_price}>P{totalPrice.toFixed(2)}</Text>
-        </View>
-      </View>
-      
-      
+       
     </View>
   )
 }
@@ -84,41 +127,65 @@ const styles = StyleSheet.create({
     justifyContent: "center"
 
   },
+
+  contentWrapper: {
+    width: '90%',
+    height: '80%',
+    position: 'relative',
+    alignItems: 'center',
+  },
   product_image_container: {
     position: "absolute",
-    top: 40,
-    right: 80,
-    width: "20%",
-    height: "30%",
-    backgroundColor: "lightblue",
-    borderRadius: 20,    
+    top: (-height * 0.1) + 30,
+    right: (-width * 0.1) + 50,
+    width: "40%",
+    height: 80,
+    backgroundColor: "transparent",    
     justifyContent: "center",
     alignItems: "center",
     zIndex: 1
   },
 
+  product_image: {
+    width: 220,
+    height: 220,
+    resizeMode: 'contain',
+  },
+
+  imageLabel: {
+    marginTop: 5,
+    fontSize: 14,
+    color: '#432818',
+    textAlign: "center"
+  },
+
   product_details_container: {
     position: "relative",
-    display: "flex",
-    marginTop: 20,
-    width: "80%",
-    height: "40%",
+    marginTop: height * 0.1,
+    width: "100%",
+    height: "50%",
     backgroundColor: "#ECEBE9",
     borderRadius: 20,
-    padding: 30
+    padding: 30,
+    justifyContent: "space-between"
   },
 
   product_name: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "bold",
     color: "#432818"
   },
 
   product_caffeine_level_container: {
-    backgroundColor: "brown",
     width: 70,
-    height: 20,
-    marginVertical: 20
+    height: 40,
+    marginVertical: 5
+  },
+
+  caffeine_level_indicator_image: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain"
   },
 
   product_ingredients: {
@@ -127,32 +194,22 @@ const styles = StyleSheet.create({
 
   product_price: {
     fontSize: 20,
-    marginRight: 80
+    marginRight: 10,
   },
-  product_image: {
-    width: 120,
-    height: 120,
-  },
+  
 
-  add_quantity_container: {
-    display: "flex", 
+  add_quantity_container: { 
     flexDirection: "row", 
     justifyContent: "space-between", 
     alignItems: "center", 
-    width: "99%",
-    height: "30%",
+    width: "100%",
     marginTop: 50
 
   },
 
   quantity_counter: {
-    display: "flex", 
     flexDirection: "row", 
-    height: "100%",
-    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-    
   },
 
   quantity_text_field: {
@@ -169,20 +226,18 @@ const styles = StyleSheet.create({
   },
   
   add_to_cart_container: {
-    marginRight: 30,
     marginTop: 20,
     display: "flex",
-    width: "60%",
+    width: 270,
     height: 120,
     backgroundColor: "transparent",
     justifyContent: "flex-end",
-    position: "relative",
     alignSelf: "flex-end"
   },
 
   cart_price_container: {
     backgroundColor: "#DDC9AC",
-    height: "50%",
+    height: "60%",
     width: "80%",
     borderRadius: 50,
     justifyContent: "center",
@@ -192,9 +247,9 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold"
   },
-
+  
   add_to_cart_btn: {
-    top: 60,
+    top: 75,
     width: 140,
     height: "100%",
     backgroundColor: "#432818",
@@ -205,6 +260,12 @@ const styles = StyleSheet.create({
     zIndex: 1
   },
 
+  add_to_cart_btn_icon: {
+    width: "50%",
+    height: "50%",
+    resizeMode: "contain"
+  }
+  
 })
 
 export default ProductScreen

@@ -1,16 +1,31 @@
 import React from 'react'
-import { View, Image, StyleSheet, ImageSourcePropType } from 'react-native'
+import { View, Image, StyleSheet, ImageSourcePropType, Text } from 'react-native'
 import { Stack } from 'expo-router'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import MenuScreen from '../screens/MenuScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import CartScreen from '../screens/CartScreen'
-import OrderStatusScreen from '../screens/OrderStatusScreen'
+import NotificationScreen from '../screens/NotificationScreen'
 import MenuStack from './StackNavigation'
 import { AntDesign } from '@expo/vector-icons'
 import { routeToScreen } from 'expo-router/build/useScreens'
 
 const BottomTabNavigator = createBottomTabNavigator();
+
+export const AppHeader = () => {
+    return(
+      <View style={styles.header}>
+              
+        <Image source={require("../assets/images/Logos/TCC_Logo.png")} style={styles.header_logo}></Image>
+                    
+        <View style={styles.header_title}>
+            <Text style={styles.header_title_text1}>the coffee</Text>
+            <Text style={styles.header_title_text2}>club.</Text>
+        </View>
+        
+      </View>
+    )
+}
 
 const TabsLayout = () => {
   return (
@@ -33,7 +48,7 @@ const TabsLayout = () => {
               ? require("../assets/images/Tab Icons/cart_tab.png")
               : require("../assets/images/Tab Icons/cart_tab_inactive.png");
               break;
-            case "OrderStatusScreen":
+            case "NotificationScreen":
               iconSource = focused 
               ? require("../assets/images/Tab Icons/notif_tab.png")
               : require("../assets/images/Tab Icons/notif_tab_inactive.png");
@@ -65,14 +80,16 @@ const TabsLayout = () => {
         name="CartScreen" 
         component={CartScreen} 
         options={{
+          header: AppHeader,
           tabBarLabel: "Cart",
           headerTitle: "Cart"
         }}
         />
         <BottomTabNavigator.Screen 
-        name="OrderStatusScreen" 
-        component={OrderStatusScreen} 
+        name="NotificationScreen" 
+        component={NotificationScreen} 
         options={{
+          header: AppHeader,
           tabBarLabel: "Order",
           headerTitle: "Your Orders"
         }}
@@ -82,6 +99,37 @@ const TabsLayout = () => {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  header_title: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      marginRight: 10,
+      marginTop: 10
+  },
+  header_title_text1: {
+      color: "brown",
+      fontSize: 20,
+      fontWeight: "bold"
+  },
+  header_title_text2: {
+      color: "brown",
+      fontSize: 20,
+      fontWeight: "bold",
+      marginLeft: 40
+  },
+  header_logo: {
+      width: 70,
+      height: 70,
+      resizeMode: 'contain',
+      marginLeft: 15,
+      marginTop: 10
+  },
+
   tabBarStyle: {
     position: "absolute",
     backgroundColor: "white",
