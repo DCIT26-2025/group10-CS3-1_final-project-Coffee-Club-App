@@ -17,7 +17,7 @@ import { AntDesign } from '@expo/vector-icons'
 
 const { width, height } = Dimensions.get('window');
 
-const ProductQuantityComponent = ({ product }: { product: any }) => {
+const CartProductComponent = ({ product }: { product: any }) => {
   const [quantity, setQuantity] = useState(product.quantity);
   const { cart, setCart, removeFromCart } = useCart();
 
@@ -156,7 +156,7 @@ const CartScreen = () => {
             </View>
 
             {cart.map((product, index) => (
-              <ProductQuantityComponent key={index} product={product} />
+              <CartProductComponent key={index} product={product} />
             ))}
           </View>
 

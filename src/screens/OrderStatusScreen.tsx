@@ -7,6 +7,10 @@ import {
   Image 
 } from 'react-native'
 import React from 'react'
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from '../navigation/NavigationType';
+import OrderDetailScreen from './OrderDetailScreen';
+import { AppHeader } from '../navigation/_layout';
 
 const sample_icon = require("../assets/images/Notification Icons/delilvery_alert.png");
 
@@ -23,10 +27,11 @@ const orders = [
 
 // Sort orders in descending order based on order_id
 const sortedOrders = orders.sort((a, b) => b.id - a.id);
-
 const OrderTile = ({ order }: { order: { id: number, status: string } }) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("OrderDetail")}>
       <View style={ot_styles.order_tile}>
         <View style={ot_styles.icon_container}>
           <Image source={sample_icon} style={ot_styles.icon_image}/>
@@ -43,17 +48,22 @@ const OrderTile = ({ order }: { order: { id: number, status: string } }) => {
 
 const OrderStatusScreen = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.title_container}>
-        <Text style={styles.screen_title}>Your orders</Text>
+    <View>
+      <AppHeader />
+
+      <View style={styles.container}>
+        <View style={styles.title_container}>
+          <Text style={styles.screen_title}>Your orders</Text>
+        </View>
+        <FlatList
+          data={sortedOrders}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => <OrderTile order={item} />}
+          contentContainerStyle={styles.scroll_container}
+        />
       </View>
-      <FlatList
-        data={sortedOrders}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <OrderTile order={item} />}
-        contentContainerStyle={styles.scroll_container}
-      />
     </View>
+    
   )
 }
 
@@ -73,7 +83,7 @@ const styles = StyleSheet.create({
   scroll_container: {
     flexGrow: 1,
     alignItems: "center",
-    paddingBottom: "50%"
+    paddingBottom: "90%"
   },
 });
 
