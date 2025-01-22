@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import MenuScreen from '../screens/MenuScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import CartScreen from '../screens/CartScreen'
-import NotificationScreen from '../screens/NotificationScreen'
+import OrderStatusScreen from '../screens/OrderStatusScreen'
 import MenuStack from './StackNavigation'
 import { AntDesign } from '@expo/vector-icons'
 import { routeToScreen } from 'expo-router/build/useScreens'
@@ -48,7 +48,7 @@ const TabsLayout = () => {
               ? require("../assets/images/Tab Icons/cart_tab.png")
               : require("../assets/images/Tab Icons/cart_tab_inactive.png");
               break;
-            case "NotificationScreen":
+            case "OrderStatusScreen":
               iconSource = focused 
               ? require("../assets/images/Tab Icons/notif_tab.png")
               : require("../assets/images/Tab Icons/notif_tab_inactive.png");
@@ -86,8 +86,8 @@ const TabsLayout = () => {
         }}
         />
         <BottomTabNavigator.Screen 
-        name="NotificationScreen" 
-        component={NotificationScreen} 
+        name="OrderStatusScreen" 
+        component={OrderStatusScreen} 
         options={{
           header: AppHeader,
           tabBarLabel: "Order",
