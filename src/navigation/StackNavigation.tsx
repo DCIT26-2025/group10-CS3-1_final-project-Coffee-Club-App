@@ -14,7 +14,7 @@ const MenuStack = () => {
   return (
     <Stack.Navigator>
         <Stack.Screen 
-        name="Menu" 
+        name="MainMenu" 
         component={MenuScreen}
         options={{
             headerShown: false

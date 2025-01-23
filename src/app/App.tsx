@@ -1,35 +1,33 @@
-import { View, Text } from "react-native";
-import React, { useState, useEffect } from "react";
-import TabsLayout from "../navigation/_layout";
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { supabase } from "../lib/supabase";
 import Auth from "../screens/LoginScreen";
-import { Session } from "@supabase/supabase-js";
-import { CartProvider } from '../utils/CartContext';
+import TabsLayout from "../navigation/_layout";
+import { CartProvider } from "../utils/CartContext";
 
-const MainMenu = () => {
-    return (
-      <CartProvider>
-        <TabsLayout />
-      </CartProvider>
-    );
-}
+
+
+type RootStackParamList = {
+  Auth: undefined;
+  TabsLayout: undefined;
+  MainMenu: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
-  const [session, setSession] = useState<Session | null>(null);
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
-
-  return <View>{session && session.user ? <MainMenu /> : <Auth />}</View>;
+  return (
+    <CartProvider>
+      <Stack.Navigator initialRouteName="Auth">
+        <Stack.Screen name="Auth" component={Auth} />
+        <Stack.Screen name="TabsLayout" component={TabsLayout} options={{headerShown: false}}/>
+      </Stack.Navigator>
+    </CartProvider>
+    
+  );
 }
+
+
 
 
 /*
