@@ -235,8 +235,8 @@ const CartScreen = () => {
           </View>
         </>
       )}
-      <View style={styles.add_to_cart_container}>
-        <TouchableOpacity activeOpacity= {0.5} style={styles.add_to_cart_btn}>
+      <View style={styles.place_order_container}>
+        <TouchableOpacity activeOpacity= {0.5} style={styles.place_order_btn}>
         <Text style={{fontSize: 15, color: "white"}}>PLACE ORDER</Text>
         </TouchableOpacity>
 
@@ -267,6 +267,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "90%",
     backgroundColor: "#D9D9D9",
+    borderTopWidth: 20,
+    borderTopColor: "#BA9456",
+    borderLeftWidth: 10,
+    borderLeftColor: "#BA9456",
     borderRadius: 40,
     marginVertical: 20,
     paddingVertical: 20,
@@ -378,7 +382,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  add_to_cart_container: {
+  place_order_container: {
     marginTop: 20,
     display: "flex",
     width: 270,
@@ -401,7 +405,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   
-  add_to_cart_btn: {
+  place_order_btn: {
     top: 75,
     width: 140,
     height: "100%",
@@ -413,7 +417,7 @@ const styles = StyleSheet.create({
     zIndex: 1
   },
 
-  add_to_cart_btn_icon: {
+  place_order_btn_icon: {
     width: "50%",
     height: "50%",
     resizeMode: "contain"
