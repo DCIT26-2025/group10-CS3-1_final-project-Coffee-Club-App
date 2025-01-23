@@ -55,12 +55,15 @@ const OrderStatusScreen = () => {
         <View style={styles.title_container}>
           <Text style={styles.screen_title}>Your orders</Text>
         </View>
-        <FlatList
-          data={sortedOrders}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => <OrderTile order={item} />}
-          contentContainerStyle={styles.scroll_container}
-        />
+        <View style={styles.list_container}>
+          <FlatList
+            data={sortedOrders}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => <OrderTile order={item} />}
+            contentContainerStyle={styles.flatlist_style}
+          />
+        </View>
+        
       </View>
     </View>
     
@@ -70,30 +73,38 @@ const OrderStatusScreen = () => {
 const styles = StyleSheet.create({
   container: {
     display: "flex",
+    alignItems: "center"
   },
   title_container: {
     justifyContent: "flex-end",
     height: 80,
-    width: "100%"
+    width: "100%",
+    borderBottomWidth: 2
   },
   screen_title: {
     fontSize: 30,
     fontWeight: "bold"
   },
-  scroll_container: {
+
+  list_container: {
+    width: "95%",
+    height: "80%",
+  },
+  flatlist_style: {
     flexGrow: 1,
     alignItems: "center",
-    paddingBottom: "90%"
+    paddingBottom: "50%"
   },
 });
 
 const ot_styles = StyleSheet.create({
   order_tile: {
-    width: "85%",
+    width: "100%",
     height: 100,
     backgroundColor: "transparent",
     flexDirection: "row",
-    borderWidth: 2,
+    //borderTopWidth: 1,
+    borderBottomWidth: 1,
     marginVertical: 10,
   },
   icon_container: {
