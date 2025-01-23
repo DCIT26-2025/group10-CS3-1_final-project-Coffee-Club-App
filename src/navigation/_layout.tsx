@@ -5,8 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import MenuScreen from '../screens/MenuScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import CartScreen from '../screens/CartScreen'
-import NotificationScreen from '../screens/NotificationScreen'
-import MenuStack from './StackNavigation'
+import MenuStack, { OrderStack } from './StackNavigation'
 import { AntDesign } from '@expo/vector-icons'
 import { routeToScreen } from 'expo-router/build/useScreens'
 
@@ -48,13 +47,13 @@ const TabsLayout = () => {
               ? require("../assets/images/Tab Icons/cart_tab.png")
               : require("../assets/images/Tab Icons/cart_tab_inactive.png");
               break;
-            case "NotificationScreen":
+            case "OrderStatus":
               iconSource = focused 
               ? require("../assets/images/Tab Icons/notif_tab.png")
               : require("../assets/images/Tab Icons/notif_tab_inactive.png");
               break;
             default:
-              iconSource = require("../assets/images/Tab Icons/menu_tab.png") ;
+              iconSource = require("../assets/images/Tab Icons/menu_tab.png");
               
           }
           return (
@@ -86,12 +85,12 @@ const TabsLayout = () => {
         }}
         />
         <BottomTabNavigator.Screen 
-        name="NotificationScreen" 
-        component={NotificationScreen} 
+        name="OrderStatus" 
+        component={OrderStack} 
         options={{
           header: AppHeader,
           tabBarLabel: "Order",
-          headerTitle: "Your Orders"
+          headerShown: false
         }}
         />
     </BottomTabNavigator.Navigator>
@@ -112,12 +111,12 @@ const styles = StyleSheet.create({
       marginTop: 10
   },
   header_title_text1: {
-      color: "brown",
+      color: "#432818",
       fontSize: 20,
       fontWeight: "bold"
   },
   header_title_text2: {
-      color: "brown",
+      color: "#432818",
       fontSize: 20,
       fontWeight: "bold",
       marginLeft: 40
@@ -155,7 +154,7 @@ const styles = StyleSheet.create({
   },
 
   activeTab: {
-    backgroundColor: "brown",
+    backgroundColor: "#432818",
   },
 
   inactiveTab: {

@@ -79,7 +79,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
                         selectedCategory === item.name && styles.selected_category_card
                     ]}
                     onPress={() => setSelectedCategory(item.name)}>
-                    <Text style={{ color: "brown", fontWeight: "bold", fontSize: 20}}>{item.name}</Text>
+                    <Text style={{ color: "#432818", fontWeight: "bold", fontSize: 20}}>{item.name}</Text>
                 </TouchableOpacity>
             )}
         />
@@ -122,7 +122,7 @@ const MenuScreen = ({ navigation }: MenuScreenProps) => {
                     </View>
 
                     <View style={styles.product_text_container}>
-                        <Text style={{ color: "brown", fontWeight: "bold", fontSize: 20}}>{item.name}</Text>
+                        <Text style={{ color: "#432818", fontWeight: "bold", fontSize: 20}}>{item.name}</Text>
                     </View>
                     
                 </TouchableOpacity>
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     category_container: {
         height: "25%",
         borderBottomWidth: 5,
-        borderBottomColor: "brown", 
+        borderBottomColor: "#432818FF", 
         borderBottomLeftRadius: 40,
         borderBottomRightRadius: 40
     },
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     },
 
     selected_category_card: {
-        borderColor: "brown",
+        borderColor: "#432818",
         borderWidth: 5,
     },
     
