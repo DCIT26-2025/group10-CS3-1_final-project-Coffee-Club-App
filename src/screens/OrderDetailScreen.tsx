@@ -30,7 +30,7 @@ const OrderProductComponent = ({ product }:
 
           <View style={op_styles.quantity_container}>
             <Text>Qty: {product.quantity}</Text>
-            <Text>P{product.quantityPrice.toFixed(2)}</Text>
+            <Text style={{fontWeight: "bold"}}>P{product.quantityPrice.toFixed(2)}</Text>
           </View>
         </View>
     )
@@ -157,7 +157,8 @@ const op_styles = StyleSheet.create({
     width: "30%",
     height: "100%",
     backgroundColor: "transparent",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    paddingVertical: 2,
   },
 
   quantity_container: {
@@ -165,7 +166,9 @@ const op_styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "transparent",
     alignItems: "flex-end",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    paddingVertical: 2,
+    paddingRight: 10
   }
 })
 

@@ -111,12 +111,12 @@ const styles = StyleSheet.create({
       marginTop: 10
   },
   header_title_text1: {
-      color: "brown",
+      color: "#432818",
       fontSize: 20,
       fontWeight: "bold"
   },
   header_title_text2: {
-      color: "brown",
+      color: "#432818",
       fontSize: 20,
       fontWeight: "bold",
       marginLeft: 40
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
 
   activeTab: {
-    backgroundColor: "brown",
+    backgroundColor: "#432818",
   },
 
   inactiveTab: {
