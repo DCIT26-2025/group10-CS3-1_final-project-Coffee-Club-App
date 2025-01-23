@@ -8,6 +8,7 @@ import CartScreen from '../screens/CartScreen'
 import MenuStack, { OrderStack } from './StackNavigation'
 import { AntDesign } from '@expo/vector-icons'
 import { routeToScreen } from 'expo-router/build/useScreens'
+import OrderDetailScreen from '../screens/OrderDetailScreen'
 
 const BottomTabNavigator = createBottomTabNavigator();
 
@@ -47,7 +48,7 @@ const TabsLayout = () => {
               ? require("../assets/images/Tab Icons/cart_tab.png")
               : require("../assets/images/Tab Icons/cart_tab_inactive.png");
               break;
-            case "OrderStatus":
+            case "OrderDetail":
               iconSource = focused 
               ? require("../assets/images/Tab Icons/notif_tab.png")
               : require("../assets/images/Tab Icons/notif_tab_inactive.png");
@@ -85,8 +86,8 @@ const TabsLayout = () => {
         }}
         />
         <BottomTabNavigator.Screen 
-        name="OrderStatus" 
-        component={OrderStack} 
+        name="OrderDetail" 
+        component={OrderDetailScreen} 
         options={{
           header: AppHeader,
           tabBarLabel: "Order",

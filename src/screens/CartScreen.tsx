@@ -1,19 +1,20 @@
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  ScrollView, 
-  Dimensions, 
-  TouchableOpacity, 
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+  TouchableOpacity,
   Pressable,
-  TextInput, 
+  TextInput,
   Image,
-} from 'react-native'
-import React, { useState, useEffect } from 'react'
-import { RootStackParamList } from '../navigation/NavigationType'
+} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { RootStackParamList } from '../navigation/NavigationType';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useCart } from '../utils/CartContext';
-import { AntDesign } from '@expo/vector-icons'
+import { useOrder } from '../utils/OrderContext';
+import { AntDesign } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('window');
 
@@ -38,7 +39,7 @@ const CartProductComponent = ({ product }: { product: any }) => {
   };
 
   const updateCartQuantity = (productName: string, newQuantity: number) => {
-    const updatedCart = cart.map((item : any) => {
+    const updatedCart = cart.map((item: any) => {
       if (item.name === productName) {
         return { ...item, quantity: newQuantity, totalPrice: item.price * newQuantity };
       }
@@ -52,50 +53,46 @@ const CartProductComponent = ({ product }: { product: any }) => {
   return (
     <View style={styles.product_quantity_container}>
       <TouchableOpacity onPress={() => removeFromCart(product.name)}>
-        <AntDesign name="delete" size={20} color="black" style={{ marginRight: 0}} />        
+        <AntDesign name="delete" size={20} color="black" style={{ marginRight: 0 }} />
       </TouchableOpacity>
       <View>
-        <Image 
+        <Image
           source={product.image}
           style={{
             height: 80,
             width: 80,
-            resizeMode: "contain"
-          }} 
+            resizeMode: 'contain',
+          }}
         />
       </View>
-      <View style={{ justifyContent: "space-between", height: "90%", width: "30%" }}>
+      <View style={{ justifyContent: 'space-between', height: '90%', width: '30%' }}>
         <Text>{product.name}</Text>
         <Text>P{product.price.toFixed(2)}</Text>
       </View>
-
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: 'center' }}>
         <View style={styles.quantity_counter}>
           <TouchableOpacity onPress={decrementQuantity}>
-            <Text style={{ fontSize: 40, fontWeight: "bold" }}>-</Text>
+            <Text style={{ fontSize: 40, fontWeight: 'bold' }}>-</Text>
           </TouchableOpacity>
-
           <TextInput
             style={styles.quantity_text_field}
             value={String(quantity)}
             editable={false}
           />
-
           <TouchableOpacity onPress={incrementQuantity}>
-            <Text style={{ fontSize: 40, fontWeight: "bold" }}>+</Text>
+            <Text style={{ fontSize: 40, fontWeight: 'bold' }}>+</Text>
           </TouchableOpacity>
         </View>
-        <Text style={{ fontWeight: "bold" }}>P{totalPrice.toFixed(2)}</Text>
+        <Text style={{ fontWeight: 'bold' }}>P{totalPrice.toFixed(2)}</Text>
       </View>
-
-      
     </View>
   );
 };
 
 const CartScreen = () => {
-  const { cart } = useCart();
-  const [selectedDeliveryOption, setSelectedDeliveryOption] = useState("Delivery");
+  const { cart, setCart } = useCart();
+  const { addOrder } = useOrder();
+  const [selectedDeliveryOption, setSelectedDeliveryOption] = useState('Delivery');
 
   const handleOptionPress = (option: string) => {
     setSelectedDeliveryOption(option);
@@ -108,26 +105,26 @@ const CartScreen = () => {
     setTotalOrderPrice(total);
   }, [cart]);
 
-  const [deliveryDate, setDeliveryDate] = useState("");
-  const [deliveryTime, setDeliveryTime] = useState("");
-  const timeFormat = { hour: "2-digit", minute: "2-digit" };
-  const [location, setLocation] = useState("");
+  const [deliveryDate, setDeliveryDate] = useState('');
+  const [deliveryTime, setDeliveryTime] = useState('');
+  const timeFormat = { hour: '2-digit', minute: '2-digit' };
+  const [location, setLocation] = useState('');
 
   const [date, setDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
-  const [mode, setMode] = useState<"date" | "time">("date");
+  const [mode, setMode] = useState<'date' | 'time'>('date');
 
   const toggleDatepicker = () => {
     setShowPicker(!showPicker);
   };
 
   const onChange = ({ type }: { type: string }, selectedDate: any) => {
-    if (type === "set") {
+    if (type === 'set') {
       const currentDate = selectedDate;
       setDate(currentDate);
       toggleDatepicker();
 
-      if (mode === "date") {
+      if (mode === 'date') {
         setDeliveryDate(currentDate.toDateString());
       } else {
         setDeliveryTime(currentDate.toLocaleTimeString([], timeFormat));
@@ -142,6 +139,19 @@ const CartScreen = () => {
     setMode(modeToShow);
   };
 
+  const handlePlaceOrder = () => {
+    const orderProducts = cart.map((product, index) => ({
+      id: index + 1,
+      name: product.name,
+      price: product.price,
+      quantity: product.quantity,
+      quantityPrice: product.totalPrice,
+      image: product.image,
+    }));
+    addOrder(orderProducts);
+    setCart([]);
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {cart.length === 0 ? (
@@ -152,24 +162,21 @@ const CartScreen = () => {
         <>
           <View style={styles.details_container}>
             <View style={styles.details_header}>
-              <Text style={{ fontWeight: "bold", fontSize: 28 }}>review your order</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 28 }}>review your order</Text>
             </View>
-
             {cart.map((product, index) => (
               <CartProductComponent key={index} product={product} />
             ))}
           </View>
-
           <View style={[styles.details_container, { marginBottom: 20 }]}>
             <View style={styles.details_header}>
-              <Text style={{ fontWeight: "bold", fontSize: 30 }}>delivery options</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 30 }}>delivery options</Text>
             </View>
-
             <View style={styles.delivery_option_button_container}>
               <TouchableOpacity
                 style={[
                   styles.delivery_option_button,
-                  selectedDeliveryOption === 'Delivery' && styles.selected_delivery_option_button
+                  selectedDeliveryOption === 'Delivery' && styles.selected_delivery_option_button,
                 ]}
                 onPress={() => handleOptionPress('Delivery')}
               >
@@ -178,56 +185,55 @@ const CartScreen = () => {
               <TouchableOpacity
                 style={[
                   styles.delivery_option_button,
-                  selectedDeliveryOption === 'Pickup' && styles.selected_delivery_option_button
+                  selectedDeliveryOption === 'Pickup' && styles.selected_delivery_option_button,
                 ]}
                 onPress={() => handleOptionPress('Pickup')}
               >
                 <Text style={styles._delivery_option_buttonText}>Pickup</Text>
               </TouchableOpacity>
             </View>
-
             {showPicker && (
-              <DateTimePicker 
+              <DateTimePicker
                 display="spinner"
                 value={date}
                 mode={mode}
                 onChange={onChange}
                 minimumDate={new Date()}
-                maximumDate={new Date("2030-12-31")}
+                maximumDate={new Date('2030-12-31')}
               />
             )}
             <View style={styles.delivery_details_container}>
               <Text>Date of Delivery</Text>
-              <Pressable onPress={() => showMode("date")}>
-                <TextInput 
+              <Pressable onPress={() => showMode('date')}>
+                <TextInput
                   style={styles.delivery_date_input}
                   placeholder={new Date().toDateString()}
                   value={deliveryDate}
                   onChangeText={setDeliveryDate}
-                  placeholderTextColor={"black"}
+                  placeholderTextColor={'black'}
                   editable={false}
                 />
               </Pressable>
               <Text>Time of Delivery</Text>
-              <Pressable onPress={() => showMode("time")}>
-                <TextInput 
+              <Pressable onPress={() => showMode('time')}>
+                <TextInput
                   style={styles.delivery_date_input}
-                  placeholder={"Choose Time"}
+                  placeholder={'Choose Time'}
                   value={deliveryTime}
                   onChangeText={setDeliveryTime}
-                  placeholderTextColor={"black"}
+                  placeholderTextColor={'black'}
                   editable={false}
                 />
               </Pressable>
-              {selectedDeliveryOption === "Delivery" && (
+              {selectedDeliveryOption === 'Delivery' && (
                 <>
                   <Text>Location</Text>
-                  <TextInput 
+                  <TextInput
                     style={styles.location_input}
-                    placeholder={"Enter your location"}
+                    placeholder={'Enter your location'}
                     value={location}
                     onChangeText={setLocation}
-                    placeholderTextColor={"black"}           
+                    placeholderTextColor={'black'}
                   />
                 </>
               )}
@@ -236,10 +242,9 @@ const CartScreen = () => {
         </>
       )}
       <View style={styles.place_order_container}>
-        <TouchableOpacity activeOpacity= {0.5} style={styles.place_order_btn}>
-        <Text style={{fontSize: 15, color: "white"}}>PLACE ORDER</Text>
+        <TouchableOpacity activeOpacity={0.5} style={styles.place_order_btn} onPress={handlePlaceOrder}>
+          <Text style={{ fontSize: 15, color: 'white' }}>PLACE ORDER</Text>
         </TouchableOpacity>
-
         <View style={styles.cart_price_container}>
           <Text style={styles.cart_price}>P{totalOrderPrice.toFixed(2)}</Text>
         </View>

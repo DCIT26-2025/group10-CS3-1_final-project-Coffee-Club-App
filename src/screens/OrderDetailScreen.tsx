@@ -1,83 +1,53 @@
 import {
-     View, 
-     Text,
-     StyleSheet,
-     FlatList,
-     Image
-} from 'react-native'
-import React from 'react'
-import { RootStackParamList } from '../navigation/NavigationType';
-
-const orderProducts = [
-    { id: 1, name: "Americano", price: 45.00, quantity: 2, quantityPrice: 90.00},
-    { id: 2, name: "Caramel Macchiato", price: 50.00, quantity: 3, quantityPrice: 150.00},
-    { id: 3, name: "Caramel Macchiato", price: 50.00, quantity: 3, quantityPrice: 150.00},
-];
-
-const totalPrice = orderProducts.reduce((sum, product) => sum + product.quantityPrice, 0);
-
-const OrderProductComponent = ({ product }: 
-    { product: { id: number,  name: String, price: number, quantity: number, quantityPrice: number} }) => {
-    return (
-        <View style={op_styles.container}>
-          <View style={op_styles.iconContainr}>
-            <Image source={require("../assets/images/Flavors/Iced Coffee/americano.png")} style={op_styles.icon_image}/>
-          </View>
-          <View style={op_styles.product_name_container}>
-            <Text>{product.name}</Text>
-            <Text>P{product.price.toFixed(2)} each</Text>
-          </View>
-
-          <View style={op_styles.quantity_container}>
-            <Text>Qty: {product.quantity}</Text>
-            <Text style={{fontWeight: "bold"}}>P{product.quantityPrice.toFixed(2)}</Text>
-          </View>
-        </View>
-    )
-}
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image
+} from 'react-native';
+import React from 'react';
+import { useOrder } from '../utils/OrderContext';
 
 const OrderDetailScreen = () => {
+  const { orderProducts } = useOrder();
+
+  const totalPrice = orderProducts.reduce((sum, product) => sum + product.quantityPrice, 0);
+
+  const OrderProductComponent = ({ product }: { product: any }) => {
+    return (
+      <View style={op_styles.container}>
+        <View style={op_styles.iconContainr}>
+          <Image source={product.image} style={op_styles.icon_image} />
+        </View>
+        <View style={op_styles.product_name_container}>
+          <Text>{product.name}</Text>
+          <Text>P{product.price.toFixed(2)} each</Text>
+        </View>
+        <View style={op_styles.quantity_container}>
+          <Text>Qty: {product.quantity}</Text>
+          <Text style={{ fontWeight: 'bold' }}>P{product.quantityPrice.toFixed(2)}</Text>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.details_container}>
         <Text style={styles.detail_headers}>products</Text>
         <View style={styles.list_container}>
-          <FlatList 
+          <FlatList
             data={orderProducts}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => <OrderProductComponent product={item}/>}
+            keyExtractor={(item, index) => `${item.id}-${index}`}
+            renderItem={({ item }) => <OrderProductComponent product={item} />}
             contentContainerStyle={styles.flatlist_style}
           />
         </View>
-        
         <Text style={styles.total_price}>Total P{totalPrice.toFixed(2)}</Text>
-
-        <Text style={styles.detail_headers}>delivery details</Text>
-        <View>
-          <View style={styles.detail_container}>
-            <Text style={styles.detail_variable}>Type</Text>
-            <Text>Delivery</Text>
-          </View>
-          
-          <View style={styles.detail_container}>
-            <Text style={styles.detail_variable}>Date</Text>
-            <Text>January 12, 2024</Text>
-          </View>
-
-          <View style={styles.detail_container}>
-            <Text style={styles.detail_variable}>Time</Text>
-            <Text>2:00pm</Text>
-          </View>
-
-          <View style={styles.detail_container}>
-            <Text style={styles.detail_variable}>Address</Text>
-            <Text>Mendez, Cavite</Text>
-          </View>
-        </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -105,7 +75,7 @@ const styles = StyleSheet.create({
 
     list_container: {
       width: "100%",
-      height: "40%",
+      height: "80%",
       borderBottomWidth: 2,
     },
 
