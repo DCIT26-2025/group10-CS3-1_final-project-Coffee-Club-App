@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Auth from "../screens/LoginScreen";
 import TabsLayout from "../navigation/_layout";
 import { CartProvider } from "../utils/CartContext";
+import { OrderProvider } from "../utils/OrderContext";
 
 
 
@@ -17,12 +18,15 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <CartProvider>
-      <Stack.Navigator initialRouteName="Auth">
-        <Stack.Screen name="Auth" component={Auth} />
-        <Stack.Screen name="TabsLayout" component={TabsLayout} options={{headerShown: false}}/>
-      </Stack.Navigator>
-    </CartProvider>
+    
+    <OrderProvider>
+      <CartProvider>
+        <Stack.Navigator initialRouteName="Auth">
+          <Stack.Screen name="Auth" component={Auth} />
+          <Stack.Screen name="TabsLayout" component={TabsLayout} options={{headerShown: false}}/>
+        </Stack.Navigator>
+      </CartProvider>
+    </OrderProvider>
     
   );
 }
