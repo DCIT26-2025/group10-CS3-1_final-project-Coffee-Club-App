@@ -55,6 +55,8 @@ export default function Auth() {
         Alert.alert("Error", "Incorrect password.");
       } else {
         Alert.alert("Success", "Logged in successfully!");
+        setContactNumber(''); // Clear contact number input
+        setPassword(''); 
         navigation.navigate("TabsLayout"); // Navigate to TabsLayout
       }
     } catch (err) {
@@ -78,6 +80,9 @@ export default function Auth() {
         Alert.alert("Error", error.message);
       } else {
         Alert.alert("Success", "Account created successfully!");
+        setContactNumber(''); // Clear contact number input
+        setPassword(''); 
+
       }
     } catch (err) {
       console.error("Sign-up error:", err);
@@ -117,7 +122,7 @@ export default function Auth() {
           onChangeText={setPassword}
         />
 
-        <Text style={styles.forgotPassword}>Forgot Password</Text>
+        
       </View>
 
       <View style={styles.buttonContainer}>
