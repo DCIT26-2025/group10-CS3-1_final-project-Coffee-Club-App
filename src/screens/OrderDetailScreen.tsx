@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import { useOrder } from '../utils/OrderContext';
+import { AppHeader } from '../navigation/_layout';
 
 const OrderDetailScreen = () => {
   const { orderProducts } = useOrder();
@@ -15,6 +16,7 @@ const OrderDetailScreen = () => {
 
   const OrderProductComponent = ({ product }: { product: any }) => {
     return (
+      
       <View style={op_styles.container}>
         <View style={op_styles.iconContainr}>
           <Image source={product.image} style={op_styles.icon_image} />
@@ -36,12 +38,19 @@ const OrderDetailScreen = () => {
       <View style={styles.details_container}>
         <Text style={styles.detail_headers}>products</Text>
         <View style={styles.list_container}>
-          <FlatList
+          {orderProducts.length === 0 ? (
+            <View style={{width: "100%", height:"100%", alignItems:"center", justifyContent:"center"}}>
+              <Text style={{fontWeight: "bold", fontSize: 20}}>There are no orders yet</Text>
+            </View>
+          ) : (
+            <FlatList
             data={orderProducts}
             keyExtractor={(item, index) => `${item.id}-${index}`}
             renderItem={({ item }) => <OrderProductComponent product={item} />}
             contentContainerStyle={styles.flatlist_style}
           />
+          )};
+          
         </View>
         <Text style={styles.total_price}>Total P{totalPrice.toFixed(2)}</Text>
       </View>
@@ -77,6 +86,7 @@ const styles = StyleSheet.create({
       width: "100%",
       height: "80%",
       borderBottomWidth: 2,
+      borderTopWidth: 2
     },
 
     total_price: {

@@ -9,7 +9,7 @@ import { OrderProvider } from "../utils/OrderContext";
 
 
 type RootStackParamList = {
-  Auth: undefined;
+  Login: undefined;
   TabsLayout: undefined;
   MainMenu: undefined;
 };
@@ -21,8 +21,8 @@ export default function App() {
     
     <OrderProvider>
       <CartProvider>
-        <Stack.Navigator initialRouteName="Auth">
-          <Stack.Screen name="Auth" component={Auth} />
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Login" component={Auth} />
           <Stack.Screen name="TabsLayout" component={TabsLayout} options={{headerShown: false}}/>
         </Stack.Navigator>
       </CartProvider>
