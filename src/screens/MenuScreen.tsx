@@ -14,7 +14,7 @@ const categories = [
 ]
 
 const icedcoffee_flavors = [
-    { name: "Americano", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
+    { name: "Americano", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Iced Coffee/americano.png") },
     { name: "Spanish Latte", price: 60.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Iced Coffee/spanish_latte.png") },
     { name: "Matcha", price: 70.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Iced Coffee/matcha.png") },
     { name: "Caramel macchiato", price: 80.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Iced Coffee/caramel_macchiato.png") },
@@ -25,7 +25,7 @@ const icedcoffee_flavors = [
 
 
 const milktea_flavors = [
-    { name: "Thai", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Milktea/thai.png") },
+    { name: "Thai", price: 50.00, ingredients: "evaporated milk, sugar, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Milktea/thai.png") },
     { name: "Tiramisu", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Milktea/tiramisu.png") },
     { name: "Matcha Tea", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Milktea/matcha_tea.png") },
     { name: "Taro", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Milktea/taro.png") },
@@ -34,7 +34,7 @@ const milktea_flavors = [
 
 
 const lemonade_flavors = [
-    { name: "Blueberry", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Lemonade/Blueberry.png") },
+    { name: "Blueberry", price: 50.00, ingredients: "blueberries, lemon juice", caffeine_level: 1, image: require("../assets/images/Flavors/Lemonade/Blueberry.png") },
     { name: "Mango", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 1, image: require("../assets/images/Flavors/Lemonade/mango.png") },
     { name: "Lime", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 2, image: require("../assets/images/Flavors/Lemonade/lime.png") },
     { name: "Strawberry", price: 50.00, ingredients: "milk, coffee, condensed milk", caffeine_level: 3, image: require("../assets/images/Flavors/Lemonade/strawberry.png") },
